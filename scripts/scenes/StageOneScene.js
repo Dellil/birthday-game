@@ -30,9 +30,6 @@ export default class StageOneScene extends Phaser.Scene {
 
         this.rectObstacle = createRectangle(this, 500, 720, 50, 400);
         this.physics.add.existing(this.rectObstacle, true);
-
-
-
     }
     update() {
         this.g_obj_conroller.leftController();
@@ -41,10 +38,12 @@ export default class StageOneScene extends Phaser.Scene {
         this.physics.collide(this.rectChar, this.rectObstacle,
             function (first_obj, second_obj) {
                 first_obj.body.setVelocity(this.xV, this.yV);
+                this.cameras.main.shake(300);
             },
             function (first_obj, second_obj) {
-                this.xV = first_obj.body.velocity.x * -30;
-                this.yV = first_obj.body.velocity.y * -30;
+                this.xV = first_obj.body.velocity.x * -100;
+                this.yV = first_obj.body.velocity.y * -80;
+
             }
             , this);
     }
