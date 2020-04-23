@@ -1,5 +1,5 @@
 /**
- * set scene configuration via this class
+ * set scene's configuration via this class
  */
 import StageStart from './StageStart.js';
 

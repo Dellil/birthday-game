@@ -5,7 +5,7 @@
  */
 import createRectangle from '../sprites/Rectangle.js';
 import GameObjectController from "../controllers/CharacterController.js";
-
+import StageStart from './StageStart.js';
 
 export default class StageOneScene extends Phaser.Scene {
     constructor(config) {
@@ -30,6 +30,8 @@ export default class StageOneScene extends Phaser.Scene {
 
         this.rectObstacle = createRectangle(this, 500, 720, 50, 400);
         this.physics.add.existing(this.rectObstacle, true);
+
+        this.invokeDebug();
     }
     update() {
         this.g_obj_conroller.leftController();
@@ -46,6 +48,15 @@ export default class StageOneScene extends Phaser.Scene {
 
             }
             , this);
+    }
+
+    invokeDebug() {
+        let stageStart = this.add.text(100, 150, "Go to Start", { fontSize: '40px' });
+        stageStart.setInteractive();
+        stageStart.on("pointerdown", function (p, lX, lY, e) {
+            this.scene.scene.add("stageStart", StageStart, true);
+            this.scene.scene.remove(this.scene);
+        });
     }
 }
 // TEST CODE
