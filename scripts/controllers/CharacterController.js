@@ -12,7 +12,7 @@ export default class GameObjectController {
     spaceController() {
         this.space.on('up', function (key, event) {
             let time_pressed = key.timeDown - key.timeUp;
-            const velo_constant = -300;
+            const velo_constant = -220;
             if (time_pressed < -500) {
                 time_pressed = -500;
             }
