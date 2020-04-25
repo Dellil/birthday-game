@@ -11,7 +11,7 @@ export default class StageEndScene extends Phaser.Scene {
     }
 
     create() {
-        let startText = this.add.text(100, 50, "Stage Two Scene", { fontSize: '40px' });
+        let startText = this.add.text(100, 50, "Stage End Scene", { fontSize: '40px' });
         invokeDebug(this);
     }
 
