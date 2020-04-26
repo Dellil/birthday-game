@@ -19,6 +19,8 @@ export default class StageOneManager {
         this.patternGroup = this.patternManager.createPatternByNums(patternNums);
         this.patternArray = this.patternGroup.getChildren();
         this.addPatternPhysicsBody();
+
+        return this.patternGroup;
     }
 
     addPatternPhysicsBody() {
@@ -39,8 +41,9 @@ export default class StageOneManager {
 
     collidePatterns() {
         if (this.patternMovingArray.length == 0) {
-            return
+            return;
         }
+
         this.patternMovingArray.forEach(pattern => {
             if (pattern.getLength() == 0) {
                 return;
@@ -56,10 +59,10 @@ export default class StageOneManager {
                 function (first_obj, second_obj) {
                 },
                 function (first_obj, second_obj) {
-                    this.xV = first_obj.body.velocity.x * -100;
-                    this.yV = first_obj.body.velocity.y * -80;
-                    first_obj.body.setVelocity(this.xV, this.yV);
-                    this.scene.cameras.main.shake(300);
+                    // this.xV = first_obj.body.velocity.x * -100;
+                    // this.yV = first_obj.body.velocity.y * -80;
+                    // first_obj.body.setVelocity(this.xV, this.yV);
+                    // this.scene.cameras.main.shake(300);
                 },
                 this
             );

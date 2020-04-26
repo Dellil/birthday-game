@@ -49,6 +49,7 @@ export default class StageOneScene extends Phaser.Scene {
     }
 
     update() {
+        this.fps.setText(this.physics.world.fps);
         this.stageManager.collidePatterns();
     }
 }
