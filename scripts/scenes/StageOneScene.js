@@ -36,9 +36,12 @@ export default class StageOneScene extends Phaser.Scene {
         invokeDebug(this);
 
         this.pattern = new PatternManager(this, this.rectChar);
-        this.o_group = this.pattern.getPattern1();
+        this.o_group = this.pattern.getPattern2();
+        let a = this.add.group(this.o_group);
+        console.log(a);
+
     }
     update() {
-        this.pattern.pattern1CollideControl(this.o_group);
+        // this.pattern.pattern2CollideControl(this.o_group);
     }
 }
