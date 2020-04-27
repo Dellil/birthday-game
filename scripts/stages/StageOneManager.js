@@ -48,10 +48,7 @@ export default class StageOneManager {
             return;
         }
         this.patternMovingArray.forEach(pattern => {
-            this.scene.physics.overlap(
-                this.player,
-                pattern,
-                function (obj1, obj2) { },
+            this.scene.physics.overlap(this.player, pattern, function () { },
                 function (obj1, obj2) {
                     this.scene.cameras.main.shake(200);
                     console.log(this.patternMovingArray.length);
