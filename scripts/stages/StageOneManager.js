@@ -3,6 +3,7 @@
  * 2020/04/27
  */
 import PatternManager from '../patterns/PatternManager.js';
+import StageTwo from '../scenes/StageTwoScene.js';
 
 
 export default class StageOneManager {
@@ -15,6 +16,7 @@ export default class StageOneManager {
         this.xV = 0;
         this.yV = 0;
         this.patternManager = new PatternManager(this.scene);
+        this.ticket = null;
     }
 
     addPatternPhysicsBody() {
@@ -35,14 +37,15 @@ export default class StageOneManager {
         return this.patternGroup;
     }
 
-    moveFirstPattern() {
+    moveFirstPattern(eventArgs) {
         let firstPattern = this.patternArray.shift();
         firstPattern.getChildren().forEach(obstacle => {
-            obstacle.body.setVelocity(-500, 0);
+            obstacle.body.setVelocity(eventArgs, 0);
         });
         this.patternMovingArray.push(firstPattern);
     }
 
+    // used in the scene's update method
     overlapCharacterAndPattern() {
         if (this.patternMovingArray.length == 0) {
             return;
@@ -50,23 +53,46 @@ export default class StageOneManager {
         this.patternMovingArray.forEach(pattern => {
             this.scene.physics.overlap(this.player, pattern, function () { },
                 function (obj1, obj2) {
+                    // obj1 is player object, 2 is rect-obstacle object
                     this.scene.cameras.main.shake(200);
-                    console.log(this.patternMovingArray.length);
                 },
                 this
             );
         });
     }
 
+    overlapCharacterAndTicket() {
+        if (this.ticket === null) {
+            return;
+        }
+        this.scene.physics.overlap(
+            this.player, this.ticket, function () { },
+            function (obj1, obj2) {
+                this.scene.scene.add("Stage2", StageTwo, true);
+                this.scene.scene.remove(this.scene);
+            },
+            this
+        );
+    }
+
+    // used in time event
     patternLength() {
         return this.patternGroup.getChildren().length;
     }
 
+    // used in physics world event
     containsAndRemove(object) {
         this.patternMovingArray.forEach(pattern => {
             if (pattern.contains(object) && pattern.countActive() == 0) {
                 this.patternMovingArray.shift();
+                if (this.patternMovingArray.length == 0) {
+                    this.createNextStageObject();
+                }
             }
         });
+    }
+
+    createNextStageObject() {
+        this.ticket = this.patternManager.createNextStageObject();
     }
 }

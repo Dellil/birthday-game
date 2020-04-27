@@ -18,8 +18,8 @@ let config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: false,
-            debugShowBody: false,
+            debug: true,
+            debugShowBody: true,
         }
     },
     input: {

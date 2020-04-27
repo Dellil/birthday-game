@@ -23,4 +23,8 @@ export default class PatternManager {
 
         return this.createGroup(patterns);
     }
+
+    createNextStageObject() {
+        return this.pattern.getPattern0();
+    }
 }

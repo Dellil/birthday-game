@@ -2,7 +2,7 @@ import createRectangle from "../sprites/Rectangle";
 
 
 /**
- * obstacle patterns (In game)
+ * rectangle Obstacle patterns (In game)
  * 2020/04/25
  */
 export default class ObstaclePattern {
@@ -40,11 +40,18 @@ export default class ObstaclePattern {
             case 9:
                 pattern = this.getPattern9();
                 break;
-            case 10:
-                pattern = this.getPattern10();
-                break;
         }
         return pattern;
+    }
+    /**
+     * Go to Next Stage
+     */
+    getPattern0() {
+        let ticket = createRectangle(this.scene, 1320, 360, 50, 50);
+        this.scene.physics.add.existing(ticket);
+        ticket.body.setSize(50, 720);
+        ticket.body.setVelocityX(-500);
+        return ticket;
     }
 
     /**

@@ -1,5 +1,5 @@
 # for my brother!
-#### This project is for my brother birthday
+#### This project is for my brother's birthday
 
 ## I'm used..
 - Node.js v12.13.1
