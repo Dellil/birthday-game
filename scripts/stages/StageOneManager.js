@@ -12,8 +12,19 @@ export default class StageOneManager {
         this.patternGroup = null;
         this.patternArray = null;
         this.patternMovingArray = new Array();
-
+        this.xV = 0;
+        this.yV = 0;
         this.patternManager = new PatternManager(this.scene);
+    }
+
+    addPatternPhysicsBody() {
+        this.patternArray.forEach(pattern => {
+            pattern.getChildren().forEach(obstacle => {
+                this.scene.physics.add.existing(obstacle);
+                obstacle.body.onWorldBounds = true;
+                obstacle.body.collideWorldBounds = true;
+            })
+        });
     }
 
     createPatternGroup(patternNums) {
@@ -24,24 +35,41 @@ export default class StageOneManager {
         return this.patternGroup;
     }
 
-    addPatternPhysicsBody() {
-        this.patternArray.forEach(pattern => {
-            pattern.getChildren().forEach(obstacle => {
-                this.scene.physics.add.existing(obstacle);
-                obstacle.body.onWorldBounds = true;
-                obstacle.body.collideWorldBounds = true;
-            })
-        })
-    }
-
     moveFirstPattern() {
         let firstPattern = this.patternArray.shift();
         firstPattern.getChildren().forEach(obstacle => {
             obstacle.body.setVelocity(-500, 0);
         });
+        this.patternMovingArray.push(firstPattern);
+    }
+
+    overlapCharacterAndPattern() {
+        if (this.patternMovingArray.length == 0) {
+            return;
+        }
+        this.patternMovingArray.forEach(pattern => {
+            this.scene.physics.overlap(
+                this.player,
+                pattern,
+                function (obj1, obj2) { },
+                function (obj1, obj2) {
+                    this.scene.cameras.main.shake(200);
+                    console.log(this.patternMovingArray.length);
+                },
+                this
+            );
+        });
     }
 
     patternLength() {
         return this.patternGroup.getChildren().length;
+    }
+
+    containsAndRemove(object) {
+        this.patternMovingArray.forEach(pattern => {
+            if (pattern.contains(object) && pattern.countActive() == 0) {
+                this.patternMovingArray.shift();
+            }
+        });
     }
 }

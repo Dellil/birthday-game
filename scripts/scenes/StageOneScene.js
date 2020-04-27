@@ -31,6 +31,7 @@ export default class StageOneScene extends Phaser.Scene {
         this.rectChar.body.onWorldBounds = true;
 
         this.patternNums = [1, 3, 2, 7, 9, 3, 8, 1, 2, 3, 1, 3, 2, 7, 9, 3, 8, 1, 2, 3];
+        this.patternNums2 = [1, 3, 2, 7, 9];
 
         this.stageManager = new StageOneManager(this, this.rectChar);
         this.stageManager.createPatternGroup(this.patternNums);
@@ -54,14 +55,14 @@ export default class StageOneScene extends Phaser.Scene {
                 body.gameObject.removeAllListeners();
                 body.gameObject.setActive(false);
                 body.gameObject.setVisible(false);
-                console.log(body);
                 body.destroy();
+                this.stageManager.containsAndRemove(body.gameObject);
             }
-        });
+        }, this);
     }
 
     update() {
-        super.update();
         this.fps.setText([this.game.getTime(), this.game.getFrame()]);
+        this.stageManager.overlapCharacterAndPattern();
     }
 }
