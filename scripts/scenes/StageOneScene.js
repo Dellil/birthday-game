@@ -18,8 +18,9 @@ export default class StageOneScene extends StageParent {
 
     create() {
         super.create();
+
         this.enableCharacterControl();
-        this.patternNums = [9, 2, 6];
+        this.patternNums = [9, 2, 6, 5, 8, 1, 3, 7];
         this.setNextScene(StageTwo, "STAGE2");
         this.createPatternGroup();
         this.eventArgs = [-500];

@@ -8,6 +8,7 @@ import StageManager from './scenes/StageManagerScene.js'
 
 
 const Phaser = phaser;
+let audioContext = new AudioContext();
 
 let config = {
     type: Phaser.AUTO,
@@ -31,6 +32,9 @@ let config = {
     fps: {
         min: 60,
         target: 60
+    },
+    audio: {
+        context: audioContext
     }
 };
 
