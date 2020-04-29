@@ -3,7 +3,6 @@
  * 2020/04/27
  */
 import PatternManager from '../patterns/PatternManager.js';
-import StageTwo from '../scenes/StageTwoScene.js';
 
 
 export default class StageOneManager {
@@ -17,6 +16,9 @@ export default class StageOneManager {
         this.yV = 0;
         this.patternManager = new PatternManager(this.scene);
         this.ticket = null;
+
+        this.nextScene = null;
+        this.name = null;
     }
 
     addPatternPhysicsBody() {
@@ -66,10 +68,16 @@ export default class StageOneManager {
             return;
         }
         this.scene.physics.overlap(
-            this.player, this.ticket, function () { },
+            this.player, this.ticket, function () {
+            },
             function (obj1, obj2) {
-                this.scene.scene.add("Stage2", StageTwo, true);
+                console.log(this.scene, this.name);
+                obj1.removeAllListeners();
+                obj1.setActive(false);
+                obj1.setVisible(false);
+                obj1.body.destroy();
                 this.scene.scene.remove(this.scene);
+                this.scene.scene.add(this.name, this.nextScene, true);
             },
             this
         );

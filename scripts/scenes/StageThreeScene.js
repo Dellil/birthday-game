@@ -1,21 +1,33 @@
-import invokeDebug from '../debugs/DebugScene.js';
+/**
+ * The scene for the third stage
+ * 2020/04/23
+ * Chanhee Jang
+ */
+import StageParent from './StageParent.js';
+import StageEnd from './StageEnd.js';
 
 
-export default class StageThreeScene extends Phaser.Scene {
+export default class StageThreeScene extends StageParent {
     constructor(config) {
         super(config);
     }
 
     preload() {
-
+        super.preload();
     }
 
     create() {
-        let startText = this.add.text(100, 50, "Stage Two Scene", { fontSize: '40px' });
-        invokeDebug(this);
+        super.create();
+        this.enableCharacterControl();
+        this.patternNums = [4, 8, 6];
+        this.setNextScene(StageEnd, "STAGEEND");
+        this.createPatternGroup();
+        this.eventArgs = [-500];
+        this.emitTimeEvent();
     }
 
     update() {
-
+        super.update();
+        this.stageManager.overlapCharacterAndTicket();
     }
 }
