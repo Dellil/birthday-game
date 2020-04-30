@@ -37,6 +37,7 @@ export default class StageManager {
         this.patternArray = this.patternGroup.getChildren();
         this.addPatternPhysicsBody();
 
+
         return this.patternGroup;
     }
 

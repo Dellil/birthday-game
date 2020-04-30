@@ -53,7 +53,7 @@ export default class StageStartScene extends Phaser.Scene {
     setEvent(texts) {
         for (let i = 0; i < texts.length; i++) {
             texts[i].on("pointerdown", function (p, lX, lY, e) {
-                this.scene.scene.add("stage_" + i, this.scene.stages[i], true);
+                this.scene.scene.add("stage_" + (i+1), this.scene.stages[i], true);
                 this.scene.scene.remove(this.scene);
             })
         }

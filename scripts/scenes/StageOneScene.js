@@ -18,6 +18,7 @@ export default class StageOneScene extends StageParent {
     }
 
     create() {
+        console.log(this);
         super.create();
         this.bgm = this.sound.add("moon-night");
 
