@@ -19,6 +19,12 @@ export default class StageEndScene extends Phaser.Scene {
             volume: 0.3,
             loop: true
         });
+
+        let text = this.add.text(640, 360, "click here to get a gifticon");
+        text.setInteractive();
+        text.on("pointerdown", function () {
+            window.open("http://127.0.0.1:8080/resources/image/gifticon.jpg", "_blank");
+        }, this);
     }
 
     update() {
