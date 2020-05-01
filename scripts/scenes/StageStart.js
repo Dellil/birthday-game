@@ -16,7 +16,7 @@ export default class StageStartScene extends Phaser.Scene {
 
     preload() {
         this.load.image("bg-1", "https://relaxed-curran-4d4a23.netlify.app/bg-1.png");
-        this.load.image("bg-2", "http://127.0.0.1:8080/resources/backgrounds/bg-2.png");
+        this.load.image("bg-2", "https://relaxed-curran-4d4a23.netlify.app/bg-2.png");
     }
 
     create() {
