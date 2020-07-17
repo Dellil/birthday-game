@@ -5,7 +5,7 @@
 - Node.js v12.13.1
     - webpack 4.42.1
     - live-server
-    - bable
+    - babel
 
 - Phaser 3.22.0
 
